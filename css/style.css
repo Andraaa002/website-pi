@@ -1,0 +1,798 @@
+/* 
+    Author: Vijay Thapa;
+    Theme: Restaurant Food Order;
+    version: 1.0;
+*/
+
+/* CSS for All */
+*{
+    margin: 0 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 1%;
+}
+.img-responsive{
+    width: 100%;
+}
+.img-curve{
+    border-radius: 15px;
+}
+
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+.text-white{
+    color: white;
+}
+
+.clearfix{
+    clear: both;
+    float: none;
+}
+
+a{
+    color: #ff6b81;
+    text-decoration: none;
+}
+a:hover{
+    color: #ff4757;
+}
+
+.btn{
+    padding: 1%;
+    border: none;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+.btn-primary{
+    background-color: #ff6b81;
+    color: white;
+    cursor: pointer;
+}
+.btn-primary:hover{
+    color: white;
+    background-color: #ff4757;
+}
+h2{
+    color: #2f3542;
+    font-size: 2rem;
+    margin-bottom: 2%;
+}
+h3{
+    font-size: 1.5rem;
+}
+.float-container{
+    position: relative;
+}
+.float-text{
+    position: absolute;
+    bottom: 50px;
+    left: 40%;
+}
+fieldset{
+    border: 1px solid white;
+    margin: 5%;
+    padding: 3%;
+    border-radius: 5px;
+}
+.error{
+    padding: 2%;
+    color: red;
+}
+.success{
+    padding: 2%;
+    color: green;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* CSS for Alert */
+.alert-section {
+    background-color: #ffcccb;
+    padding: 10px 0;
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    z-index: 1000; /* Atur z-index lebih tinggi dari navbar */
+    transition: top 0.3s ease; /* Tambahkan efek transisi untuk smooth transition */
+}
+
+.alert-section.active {
+    display: block;
+}
+
+.close-btn {
+    background-color: #dc3545; /* Warna tombol tutup */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+/* CSS for navbar section */
+.navbar {
+    background: #fff9ef;
+    padding: 10px 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999; /* Atur z-index lebih rendah daripada .alert-section */
+    transition: top 0.5s ease; /* Tambahkan efek transisi untuk smooth transition */
+}
+
+.navbar.fixed {
+    top: 60px; /* Sesuaikan tinggi dengan tinggi .alert-section */
+}
+
+.logo {
+    width: 100px; /* Menggunakan lebar otomatis agar logo tidak terlalu besar */
+    float: left;
+    margin-left: 20px; /* Margin kiri untuk logo */
+}
+
+.menu {
+    line-height: 80px; /* Menyesuaikan tinggi garis untuk menu */
+    float: right; /* Meletakkan menu ke kanan */
+}
+
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    display: inline-block; /* Mengubah tampilan menu menjadi inline-block untuk tata letak horizontal */
+    padding: 0 10px; /* Padding di dalam menu */
+    font-weight: bold;
+}
+
+.menu ul li a {
+    text-decoration: none; /* Menghapus garis bawah pada tautan */
+    color: #890000; /* Warna teks menu */
+}
+
+.menu ul li a:hover {
+    color: #ff6347; /* Warna teks menu saat dihover */
+}
+
+
+/* CSS for Welcome Section */
+
+/* Deklarasi animasi untuk slide-in */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px); /* Bergerak ke atas */
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); /* Kembali ke posisi awal */
+        opacity: 1;
+    }
+}
+
+/* Styling untuk section welcome */
+.welcome {
+    position: relative; /* Pastikan posisi relatif untuk koordinasi dengan JavaScript */
+    padding: 250px 0; /* Padding atas dan bawah */
+    text-align: center; /* Posisi teks di tengah */
+    margin-top: 200px;
+    transition: margin-top 0.3s ease;
+}
+
+/* Layer untuk background image dengan transisi opacity */
+.welcome .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1s ease;
+    opacity: 0;
+}
+
+.welcome .background.active {
+    opacity: 1;
+}
+
+/* Styling untuk konten welcome */
+.welcome .container {
+    position: relative;
+    z-index: 2; /* Pastikan konten di atas background */
+    color: #ffffff;
+}
+
+.welcome h1 {
+    font-size: 48px; /* Ukuran font judul */
+    margin-bottom: 20px; /* Jarak bawah dari judul */
+    color: #eab475; /* Warna teks judul */
+    animation: slideIn 1s ease-out forwards; /* Animasi slide-in */
+    font-weight: bold;
+}
+
+.welcome p {
+    font-size: 24px; /* Ukuran font paragraf */
+    margin-bottom: 5px; /* Jarak bawah dari paragraf */
+    color: #ffffff; /* Warna teks paragraf */
+    animation: slideIn 1s ease-out forwards; /* Animasi slide-in */
+}
+
+.btn-lihat-menu {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #eab475; /* Warna teks */
+    border: 2px solid #eab475; /* Garis */
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s;
+    background-color: transparent; /* Warna latar belakang transparan */
+    animation: slideIn 1s ease-out;
+}
+
+.btn-lihat-menu:hover {
+    background-color: #eab475; /* Warna latar belakang saat dihover */
+    color: #fff; /* Warna teks saat dihover */
+}
+
+
+/* Overlay untuk menggelapkan latar belakang demi keterbacaan teks */
+.welcome::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Lapisan gelap dengan opacity 50% */
+    z-index: 1;
+}
+
+/* Mengatur margin atas dari welcome section saat alert ditampilkan */
+.navbar.fixed + .welcome {
+    margin-top: calc(var(--navbar-height, 70px) + 60px); /* Sesuaikan margin-top */
+}
+
+
+/* CSS for Food SEarch Section Home */
+
+.food-search-home{
+    background-image: url(../images/andra.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 7% 0;
+    margin-top: 0px;
+}
+
+.food-search-home input[type="search"]{
+    width: 50%;
+    padding: 1%;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+/* CSS for Food SEarch Section*/
+
+.food-search{
+    background-image: url(../images/andra.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 7% 0;
+    margin-top: 135px;
+}
+
+.food-search input[type="search"]{
+    width: 50%;
+    padding: 1%;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+/* CSS for Categories */
+
+.categories{
+    padding: 4% 0;
+    background-color: #fefff1;
+    width: 100%;
+    margin-top: 135px;
+
+}
+
+.box-3{
+    width: 28%;
+    float: left;
+    margin: 2%;
+    animation: slideIn 1s ease-out forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px); /* Bergerak ke atas */
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); /* Kembali ke posisi awal */
+        opacity: 1;
+    }
+}
+
+/* CSS for Categories Home*/
+.categories-home{
+    padding: 4% 0;
+    background-color: #fefff1;
+    width: 100%;
+    margin-top: 0px;
+
+}
+
+.box-3-home{
+    width: 28%;
+    float: left;
+    margin: 2%;
+    animation: slideIn 1s ease-out forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px); /* Bergerak ke atas */
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); /* Kembali ke posisi awal */
+        opacity: 1;
+    }
+}
+
+
+/* CSS for Food Menu */
+.food-menu{
+    background-color: #fff9df;
+    padding: 4% 0;
+    
+}
+.food-menu-box{
+    width: 43%;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+    background-color: white;
+    border-radius: 15px;
+    animation: slideIn 0.5s ease-out;
+}
+
+.food-menu-img{
+    width: 20%;
+    float: left;
+}
+
+.food-menu-desc{
+    width: 70%;
+    float: left;
+    margin-left: 8%;
+}
+
+.food-price{
+    font-size: 1.2rem;
+    margin: 2% 0;
+}
+.food-detail{
+    font-size: 1rem;
+    color: #747d8c;
+}
+
+
+/* CSS for Social */
+.footer {
+    background: #fff9ef;
+    padding: 10px 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.social ul{
+    list-style-type: none;
+}
+.social ul li{
+    display: inline;
+    padding: 1%;
+}
+
+/* for Order Section */
+.order{
+    width: 50%;
+    margin: 0 auto;
+}
+.input-responsive{
+    background-color: #ffffff;
+    width: 96%;
+    padding: 1%;
+    margin-bottom: 3%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.order-label{
+    margin-bottom: 1%; 
+    font-weight: bold;
+}
+.order fieldset {
+    background-color: #ffd988; /* Atur latar belakang menjadi putih solid */
+    padding: 20px; /* Sesuaikan padding sesuai kebutuhan */
+    border-radius: 30px; /* Opsional, tambahkan border-radius untuk sudut yang lebih melengkung */
+}
+
+/* CSS for Track Order */
+
+
+.container-track{
+    width: 80%;
+    margin: 0 auto;
+    padding: 1%;
+    animation: slideIn 0.5s ease-out;
+}
+
+h2 {
+    color: #2f3542;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tbl-full {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.tbl-full th, .tbl-full td {
+    border: 1px solid #ffffff;
+    padding: 12px;
+    text-align: left;
+}
+
+.tbl-full th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.tbl-full tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tbl-full tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Bagian Track Order */
+.track-order {
+    background-color: #fefff1;
+    padding: 4% 0; /* Ubah sesuai kebutuhan */
+}
+
+
+.track-form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.track-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.track-form input[type="text"] {
+    width: 250px;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.track-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ff6b81;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.track-form button:hover {
+    background-color: #ff4757;
+}
+
+
+/* CSS for About Us Gmaps */
+.contact-info {
+    margin-top: 135px;
+    background-color: #fefff1;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/* CSS untuk membuat tabel dengan efek bayangan */
+.table-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Background semi-transparan */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: transparent; /* Latar belakang tabel transparan */
+}
+
+.table-container th,
+.table-container td {
+    padding: 15px; /* Atur padding atas dan bawah */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Garis bawah tipis */
+}
+
+.table-container th {
+    background-color: #f2f2f2; /* Warna latar belakang untuk header */
+}
+
+.table-container th:first-child,
+.table-container td:first-child {
+    text-align: justify; /* Pusatkan teks di kolom pertama */
+}
+
+/* CSS for Div Jeda antar section*/
+
+.baru {
+    color: #6e4826; /* Warna teks */
+    padding: 50px 0; /* Padding untuk memberi ruang di dalam elemen */
+    transition: opacity 2s ease-in-out; /* Transisi untuk animasi opacity */
+    
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade-in-out {
+    animation: fade-in-out 5s infinite; /* Ubah 3s sesuai durasi yang Anda inginkan */
+}
+
+
+/* CSS for Order section*/
+.food-search-order{
+    background-image: url(../images/andra.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 7% 0;
+    margin-top: 135px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CSS for Animasi Order berhasil*/
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success.text-center {
+    font-weight: bold;
+    font-size: 24px;
+    animation: slideIn 0.5s ease-out;
+}
+
+.selected-product {
+    margin-bottom: 20px; /* Atur jarak antar produk yang dipilih */
+    padding: 10px; /* Atur padding untuk menambah ruang di sekitar setiap produk */
+    border: 1px solid #ddd; /* Opsional: Tambahkan garis pembatas antar produk */
+    border-radius: 5px; /* Opsional: Tambahkan sudut melengkung pada kotak produk */
+}
+
+
+
+/* CSS for Mobile Size or Smaller Screen */
+
+@media only screen and (max-width:768px){
+
+
+    .logo{
+        width: 100px;
+        float: none;
+        margin: 1% auto;
+    }
+
+    .categories{
+        margin-top: 185px;
+    }
+
+    .menu ul{
+        text-align: center;
+    }
+
+    .food-search input[type="search"]{
+        width: 90%;
+        padding: 2%;
+        margin-bottom: 3%;
+    }
+
+    .food-search{
+        background-image: url(../images/andra.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 7% 0;
+        margin-top: 185px; /* Memberikan margin top untuk menghindari overlap dengan navbar */
+    }
+    .food-search-order{
+        margin-top: 190px;
+    }
+
+    .btn{
+        width: 91%;
+        padding: 2%;
+    }
+
+    .categories{
+        padding: 20% 0;
+    }
+    h2{
+        margin-bottom: 10%;
+    }
+    .box-3{
+        width: 100%;
+        margin: 4% auto;
+    }
+
+    .food-menu{
+        padding: 20% 0;
+    }
+
+    .contact-info {
+        margin-top: 185px;
+    }
+
+    .food-menu-box{
+        width: 90%;
+        padding: 5%;
+        margin-bottom: 5%;
+    }
+    .social{
+        padding: 5% 0;
+    }
+    .order{
+        width: 100%;
+    }
+    .menu ul li{
+        margin-bottom: 1px; /* Adjust margin as needed */
+    }
+    .map-responsive {
+        width: 100%; /* Lebar penuh */
+        height: 300px; /* Tetapkan tinggi yang diinginkan */
+    }
+
+    .track-order{
+        margin-top: 140px;
+    }
+
+    .menu ul{
+        height: 70px;
+    }
+
+    .menu {
+        line-height: 25px; /* Menyesuaikan tinggi garis untuk menu */
+        float: right; /* Meletakkan menu ke kanan */
+    }
+
+    .tbl-full {
+        font-size: 0.5rem; /* perkecil font size */
+    }
+    .container-track {
+        width: 100%;
+        padding: 0%;
+    }
+
+    .categories-home{
+        padding: 20% 0;
+    }
+}
+    
